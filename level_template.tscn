@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://d3tgqeq1ld5n6"]
+
+[ext_resource type="Script" path="res://level.gd" id="1_8vs3v"]
+[ext_resource type="TileSet" uid="uid://cku5gmvnf8n53" path="res://tileset_fg.tres" id="2_urj6r"]
+[ext_resource type="TileSet" uid="uid://dhlhwbnh6nyd4" path="res://tileset_bg.tres" id="3_7tcof"]
+[ext_resource type="PackedScene" uid="uid://do8i3numto7al" path="res://player.tscn" id="4_nk52n"]
+[ext_resource type="Script" path="res://ladder_area.gd" id="5_jou1p"]
+
+[node name="level" type="Node2D"]
+script = ExtResource("1_8vs3v")
+
+[node name="tilemap_fg" type="TileMap" parent="."]
+z_index = 1
+tile_set = ExtResource("2_urj6r")
+format = 2
+
+[node name="tilemap_bg" type="TileMap" parent="."]
+z_index = -5
+tile_set = ExtResource("3_7tcof")
+format = 2
+
+[node name="Player" parent="." instance=ExtResource("4_nk52n")]
+position = Vector2(36, -34)
+
+[node name="ladder_shapes" type="Area2D" parent="."]
+script = ExtResource("5_jou1p")
+
+[node name="rescuables" type="Node2D" parent="."]
+
+[node name="cam_overview" type="Camera2D" parent="."]
+position = Vector2(109, -36)
+zoom = Vector2(3.215, 3.215)
+position_smoothing_enabled = true

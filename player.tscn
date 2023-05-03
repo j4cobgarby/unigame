@@ -1,0 +1,80 @@
+[gd_scene load_steps=11 format=3 uid="uid://do8i3numto7al"]
+
+[ext_resource type="Script" path="res://player_movement.gd" id="1_godet"]
+[ext_resource type="Texture2D" uid="uid://c8dxc7r2jl8j3" path="res://player_idle1.png" id="1_sw4vh"]
+[ext_resource type="Texture2D" uid="uid://mxx6wm0jxo2w" path="res://player_idle2.png" id="2_kt8ps"]
+[ext_resource type="Texture2D" uid="uid://dnhm22v5rkg05" path="res://player_run.png" id="4_14ihq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4y6i8"]
+atlas = ExtResource("4_14ihq")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g4ei7"]
+atlas = ExtResource("4_14ihq")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1t13b"]
+atlas = ExtResource("4_14ihq")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v0gbv"]
+atlas = ExtResource("4_14ihq")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6ei1o"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_sw4vh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_kt8ps")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4y6i8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g4ei7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1t13b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v0gbv")
+}],
+"loop": true,
+"name": &"running",
+"speed": 9.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8islm"]
+radius = 3.0
+height = 12.0
+
+[node name="Player" type="Node2D"]
+
+[node name="body" type="CharacterBody2D" parent="."]
+collision_mask = 5
+script = ExtResource("1_godet")
+
+[node name="sprite" type="AnimatedSprite2D" parent="body"]
+sprite_frames = SubResource("SpriteFrames_6ei1o")
+animation = &"running"
+frame = 1
+frame_progress = 0.239168
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="body"]
+position = Vector2(0, 2)
+shape = SubResource("CapsuleShape2D_8islm")
+
+[node name="cam_follow" type="Camera2D" parent="body"]
+position = Vector2(0, -24)
+zoom = Vector2(6, 6)
+limit_left = 0
+limit_bottom = 0
+position_smoothing_speed = 2.0
